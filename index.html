@@ -50,6 +50,7 @@
 
 <div id="setup">
   <form id="form" autocomplete="off">
+    <input id="k" type="text" placeholder="Pixabay key (one time only)" autocapitalize="off" spellcheck="false">
     <input id="q" type="search" placeholder="e.g. airplane" enterkeyhint="go" required>
     <button type="submit">Start</button>
   </form>
@@ -65,26 +66,37 @@
   const msg = document.getElementById('msg');
   const qInput = document.getElementById('q');
 
+  const kInput = document.getElementById('k');
   try { qInput.value = localStorage.getItem('lastQuery') || ''; } catch (e) {}
 
   let query = '', urls = [], nextPage = 1, pageCount = Infinity, index = 0;
   let current = null, loading = false, animating = false;
   const seen = new Set();
 
-  // ---------- Image source (Openverse: free, no key, mature content filtered) ----------
+  // ---------- Image source (Pixabay: curated photos, safe search on) ----------
+  let PIXABAY_KEY = '';
+  try { PIXABAY_KEY = localStorage.getItem('pixabayKey') || ''; } catch (e) {}
+  if (PIXABAY_KEY) kInput.style.display = 'none';
+  const PER_PAGE = 50;
   async function fetchPage() {
     if (loading || nextPage > pageCount) return;
     loading = true;
     try {
-      const u = 'https://api.openverse.org/v1/images/?page_size=20&mature=false' +
+      const u = 'https://pixabay.com/api/?key=' + PIXABAY_KEY +
+                '&image_type=photo&safesearch=true&per_page=' + PER_PAGE +
                 '&q=' + encodeURIComponent(query) + '&page=' + nextPage;
       const r = await fetch(u);
+      if (r.status === 400 || r.status === 401) { // bad key: ask for it again next time
+        PIXABAY_KEY = '';
+        try { localStorage.removeItem('pixabayKey'); } catch (e) {}
+        kInput.style.display = '';
+      }
       if (!r.ok) throw new Error(r.status);
       const data = await r.json();
-      pageCount = data.page_count || 0;
+      pageCount = Math.ceil((data.totalHits || 0) / PER_PAGE);
       nextPage++;
-      for (const it of data.results || []) {
-        const src = it.url;
+      for (const it of data.hits || []) {
+        const src = it.largeImageURL || it.webformatURL;
         if (src && !seen.has(src)) { seen.add(src); urls.push(src); }
       }
     } catch (e) {
@@ -154,6 +166,14 @@
     e.preventDefault();
     query = qInput.value.trim();
     if (!query) return;
+    const k = kInput.value.trim();
+    if (k) {
+      PIXABAY_KEY = k;
+      try { localStorage.setItem('pixabayKey', k); } catch (err) {}
+      kInput.value = '';
+    }
+    if (!PIXABAY_KEY) { kInput.focus(); return; }
+    kInput.style.display = 'none';
     try { localStorage.setItem('lastQuery', query); } catch (err) {}
     qInput.blur();
     urls = []; nextPage = 1; pageCount = Infinity; index = 0; seen.clear();

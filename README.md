@@ -6,7 +6,7 @@ A baby-proof picture swiper. Type a word (e.g. "airplane"), tap **Start**, hand 
 - No buttons while swiping. Zoom, long-press, and the back button are blocked.
 - Back to the search screen: close and reopen the app, or hold the top-left corner for 3 seconds.
 
-Pictures come from [Openverse](https://openverse.org) (free, no key, adult content filtered).
+Pictures come from [Pixabay](https://pixabay.com) (curated free photos, safe search on).
 
 ## Put it on your phone
 1. Open the site in Safari (iPhone) or Chrome (Android).
