@@ -1,0 +1,14 @@
+{
+  "name": "Wo ist das?",
+  "short_name": "Wo ist das?",
+  "start_url": "./lernen.html",
+  "scope": "./",
+  "display": "fullscreen",
+  "orientation": "any",
+  "background_color": "#4db6ac",
+  "theme_color": "#4db6ac",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

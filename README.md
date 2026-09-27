@@ -25,3 +25,17 @@ A second version on its own page: open `tiles.html`.
 - Tap anywhere (or swipe) for the next picture.
 - Back to the tiles (with 4 new random ones): hold the top-left corner for 3 seconds.
 - Uses the same Pixabay key as the main page.
+
+## Wo ist das? (lernen.html)
+A German word game: open `lernen.html`.
+
+- Two pictures appear. A gentle German voice asks, e.g. **"Wo ist der Traktor?"**
+- Right picture: a soft chime and praise, e.g. "Super! Das ist der Traktor." Then the next pair comes.
+- Wrong picture: it wiggles and the voice says **"Probier's nochmal!"**, then asks again.
+- No tap for a while: the question is asked again (at most twice).
+- Back to the start screen: hold the top-left corner for 3 seconds.
+- Uses the same Pixabay key as the other pages.
+
+**Best voice:** the app uses the phone's built-in German voice. For a softer, more natural one:
+- **iPhone:** Settings → Accessibility → Spoken Content → Voices → German → download **Anna (Enhanced)** or a Premium voice.
+- **Android:** Settings → Text-to-speech → Google → install German voice data.
