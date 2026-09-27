@@ -16,3 +16,12 @@ Pictures come from [Pixabay](https://pixabay.com) (curated free photos, safe sea
 A web page can't stop the home gesture. Use the phone's built-in lock:
 - **iPhone:** Settings → Accessibility → Guided Access → On. In the app, triple-click the side button → Start.
 - **Android:** Settings → Security → App pinning → On. Open recent apps, tap the app icon → Pin.
+
+## Picture Tiles (tiles.html)
+A second version on its own page: open `tiles.html`.
+
+- The home screen shows 4 random things (dog, train, apple, …) as picture tiles.
+- Tap a tile: only pictures of that thing appear, in random order.
+- Tap anywhere (or swipe) for the next picture.
+- Back to the tiles (with 4 new random ones): hold the top-left corner for 3 seconds.
+- Uses the same Pixabay key as the main page.
